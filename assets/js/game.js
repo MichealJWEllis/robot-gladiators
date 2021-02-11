@@ -6,11 +6,11 @@ var playerMoney = 10;
 // log multiple values at once 
 console.log(playerName, playerAttack, playerHealth);
 
-var enemyName = "Roborto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function () {
+var fight = function (enemyName) {
     window.alert("Welcome to Robot Gladiators!");
 
     // Request of player to fight or skip
@@ -32,7 +32,7 @@ var fight = function () {
             window.alert(enemyName + " has died!");
         }
         else {
-            window.alert(enemyName + " still has" + enemyHealth + " health left.");
+            window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
 
         // Subtract the value of "enemyAttack" from the value of "playerHealth" and use that result to update the value in the "playerHealth" variable.
@@ -49,7 +49,7 @@ var fight = function () {
             window.alert(playerName + " has died!");
         }
         else {
-            window.alert(playerName + " still has" + playerHealth + " health left.");
+            window.alert(playerName + " still has " + playerHealth + " health left.");
         }
         // if player choses to skip
 
@@ -85,4 +85,8 @@ var fight = function () {
 
 };
 
-fight(); 
+// for loop to iterate over each robot and fight them.  
+// still confused on how this loops through each robot and fights them, but doesn't complete fight.  Review 3.2.6 a little closer. 
+for (var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+};

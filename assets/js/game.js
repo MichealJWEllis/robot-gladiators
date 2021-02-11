@@ -67,6 +67,10 @@ var fight = function () {
             // then subtract money from playerMoney for skipping
 
             playerMoney = playerMoney - 2;
+
+            // verify money loss on skip
+
+            console.log(playerMoney);
         }
 
         // if no (false), ask question again by running fight() again

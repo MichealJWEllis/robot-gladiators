@@ -11,82 +11,101 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 
 var fight = function (enemyName) {
-    window.alert("Welcome to Robot Gladiators!");
 
-    // Request of player to fight or skip
+    // repeat and execute as long as the eney-robot is alive
 
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
+    while (enemyHealth > 0) {
 
-    if (promptFight === "fight" || promptFight === "FIGHT") {
+        // place fight function code block here ...
 
-        // Subtract the value of "playerAttack" from the value of "enemyHealth" and use that result to update the value in the "enemyHealth" variable
+        // Request of player to fight or skip
 
-        enemyHealth = enemyHealth - playerAttack;
+        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
 
-        // Log a resulting message to the console so we know that it worked. 
+        if (promptFight === "fight" || promptFight === "FIGHT") {
 
-        console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
+            // Subtract the value of "playerAttack" from the value of "enemyHealth" and use that result to update the value in the "enemyHealth" variable
 
-        // check enemy's health
-        if (enemyHealth <= 0) {
-            window.alert(enemyName + " has died!");
+            enemyHealth = enemyHealth - playerAttack;
+
+            // Log a resulting message to the console so we know that it worked. 
+
+            console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
+
+            // check enemy's health
+            if (enemyHealth <= 0) {
+                window.alert(enemyName + " has died!");
+            }
+            else {
+                window.alert(enemyName + " still has " + enemyHealth + " health left.");
+            }
+
+            // Subtract the value of "enemyAttack" from the value of "playerHealth" and use that result to update the value in the "playerHealth" variable.
+
+            playerHealth = playerHealth - enemyAttack;
+
+            // Log a resulting message to the console so we know that it worked. 
+
+            console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
+
+            // check player's health
+
+            if (playerHealth <= 0) {
+                window.alert(playerName + " has died!");
+            }
+            else {
+                window.alert(playerName + " still has " + playerHealth + " health left.");
+            }
+            // if player choses to skip
+
+        } else if (promptFight === "skip" || promptFight === "SKIP") {
+
+            // confirm player wants to skip
+
+            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+            // if yes (true), leave fight
+
+            if (confirmSkip) {
+                window.alert(playerName + " has chosen to skip the fight. Goodbye!");
+
+                // then subtract money from playerMoney for skipping
+
+                playerMoney = playerMoney - 2;
+
+                // verify money loss on skip
+
+                console.log(playerMoney);
+            }
+
+            // if no (false), ask question again by running fight() again
+            else {
+
+                fight();
+
+            }
+        } else {
+            window.alert("You need to choose a valid option. Try again!");
         }
-        else {
-            window.alert(enemyName + " still has " + enemyHealth + " health left.");
-        }
 
-        // Subtract the value of "enemyAttack" from the value of "playerHealth" and use that result to update the value in the "playerHealth" variable.
-
-        playerHealth = playerHealth - enemyAttack;
-
-        // Log a resulting message to the console so we know that it worked. 
-
-        console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
-
-        // check player's health
-
-        if (playerHealth <= 0) {
-            window.alert(playerName + " has died!");
-        }
-        else {
-            window.alert(playerName + " still has " + playerHealth + " health left.");
-        }
-        // if player choses to skip
-
-    } else if (promptFight === "skip" || promptFight === "SKIP") {
-
-        // confirm player wants to skip
-
-        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
-        // if yes (true), leave fight
-
-        if (confirmSkip) {
-            window.alert(playerName + " has chosen to skip the fight. Goodbye!");
-
-            // then subtract money from playerMoney for skipping
-
-            playerMoney = playerMoney - 2;
-
-            // verify money loss on skip
-
-            console.log(playerMoney);
-        }
-
-        // if no (false), ask question again by running fight() again
-        else {
-
-            fight();
-
-        }
-    } else {
-        window.alert("You need to choose a valid option. Try again!");
     }
 
 };
 
 // for loop to iterate over each robot and fight them.  
-// still confused on how this loops through each robot and fights them, but doesn't complete fight.  Review 3.2.6 a little closer. 
+// still confused on how this loops through each robot and fights them, but doesn't complete fight.  Review 3.2.6 a little closer. = explained: the below for loop iterates then passes the robot's name in to the function. That name is then assigned to enemyName and ran through the fuction. 
 for (var i = 0; i < enemyNames.length; i++) {
-    fight(enemyNames[i]);
+    //debugger;
+
+    // assigning new var to reset enemy health on each new robot
+
+    var pickedEnemyName = enemyNames[i];
+
+    // health reset
+
+    enemyHealth = 50;
+
+    // call fight function with enemy-robot, now with health reset to 50
+
+    fight(pickedEnemyName);
 };

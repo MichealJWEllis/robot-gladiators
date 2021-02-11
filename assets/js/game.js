@@ -91,9 +91,23 @@ var fight = function (enemyName) {
 // for loop to iterate over each robot and fight them.  
 // still confused on how this loops through each robot and fights them, but doesn't complete fight.  Review 3.2.6 a little closer. = explained: the below for loop iterates then passes the robot's name in to the function. That name is then assigned to enemyName and ran through the fuction. 
 for (var i = 0; i < enemyNames.length; i++) {
+
+    // verify player health before each loop and present welcome message
+
+    if (playerHealth > 0) {
+
+        // let player know what round they are in, remember that arrays start at 0 so it needs to have a 1 added to it
+
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+
+    }
+    else {
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+    }
     //debugger;
 
-    // assigning new var to reset enemy health on each new robot
+    // pick new enemy to fight based on the index of the enemynames array
 
     var pickedEnemyName = enemyNames[i];
 

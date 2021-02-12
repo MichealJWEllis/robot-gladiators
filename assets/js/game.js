@@ -1,44 +1,54 @@
+var fightOrSkip = function () {
 
+    // Request of player to fight or skip
+
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
+
+    // Conditional Recursive Fuction Call
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+
+    // if player choses to skip
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip") {
+
+        // confirm player wants to skip
+
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+        // if yes (true), leave fight
+
+        if (confirmSkip) {
+            window.alert(playerInfo.name + " has chosen to skip the fight. Goodbye!");
+
+            // then subtract money from playerInfo.money for skipping
+            // ensures that the var never dips below 0
+            playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+            // verify money loss on skip
+
+            console.log("playerInfo.money", playerInfo.money);
+
+            return true;
+        }
+
+    }
+    return false;
+}
 
 var fight = function (enemy) {
-
 
     // repeat and execute as long as the eney-robot is alive
 
     while (enemy.health > 0 && playerInfo.health > 0) {
 
         // place fight function code block here ...
-
-        // Request of player to fight or skip
-
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose");
-
-        // if player choses to skip
-
-        if (promptFight === "skip" || promptFight === "SKIP") {
-
-            // confirm player wants to skip
-
-            var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
-            // if yes (true), leave fight
-
-            if (confirmSkip) {
-                window.alert(playerInfo.name + " has chosen to skip the fight. Goodbye!");
-
-                // then subtract money from playerInfo.money for skipping
-                // ensures that the var never dips below 0
-                playerInfo.money = Math.max(0, playerInfo.money - 10);
-
-                // verify money loss on skip
-
-                console.log("playerInfo.money", playerInfo.money);
-
-                break;
-            }
-
+        if (fightOrSkip()) {
+            break;
         }
-
         // Subtract the value of "playerInfo.attack" from the value of "enemy.health" and use that result to update the value in the "enemy.health" variable
         // ensures that the var never dips below 0
         // generate random damage value based on player's attack power
